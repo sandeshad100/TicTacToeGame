@@ -1,25 +1,20 @@
 window.addEventListener("load", function (event) {
-
-
     //default array
     var arr = [
         [0, 0, 0],
         [0, 0, 0],
         [0, 0, 0]
     ];
-
     var turn = 1;
     var playerTurn = "A";
     var content;
     var itemNo;
     var ele;
     var gameOver = false;
-
     // audio 
     var audioWin = new Audio("./assets/audio/winner.wav");
     var audioStart = new Audio("./assets/audio/start.wav");
     var audioPut = new Audio("./assets/audio/putAudio.wav");
-
     // model box
     const startBtn = document.getElementById('btnStart');
     //add event 
@@ -27,10 +22,7 @@ window.addEventListener("load", function (event) {
     const gridLen = document.querySelectorAll('.grid-item').length;
     const feedback = document.getElementById('feedback');
     var i;
-
-
     for (i = 0; i < gridLen; i++) {
-
         gridItem[i].addEventListener('click', function (e) {
             ele = document.getElementById(e.target.id);
             itemNo = this.id;
@@ -38,10 +30,7 @@ window.addEventListener("load", function (event) {
             var col = parseInt(itemNo.charAt(2));
             putOnArray(row, col);
         });
-
     }
-
-
     function putOnArray(r, c) {
         if (isEmpty(r, c)) {
             if (turn % 2 == 0) {
@@ -69,11 +58,8 @@ window.addEventListener("load", function (event) {
                 gameOver = true;
                 window.location.reload();
             }
-
-
         }
     }
-
     function isEmpty(r, c) {
         if (arr[r][c] == 0) {
             return true;
@@ -81,7 +67,6 @@ window.addEventListener("load", function (event) {
             return false;
         }
     }
-
     function checkPattern() {
         if (playerTurn == "A") {
             content = 1;
@@ -100,7 +85,6 @@ window.addEventListener("load", function (event) {
                 diagoLtoR++;
             }
         }
-
         //right to left diagonal
         if (arr[0][2] == content && arr[1][1] == content && arr[2][0] == content) {
             diagoRtoL = 3;
