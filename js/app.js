@@ -1,5 +1,11 @@
 window.addEventListener("load", function (event) {
-
+   
+    
+    
+    function test(){
+        
+    }
+   
     //default array
     var arr = [
         [0, 0, 0],
@@ -12,14 +18,17 @@ window.addEventListener("load", function (event) {
     var content;
     var itemNo;
     var ele;
+    var gameOver = false;
 
+    // audio 
+    var audioWin = new Audio("./assets/audio/success.mp3");
+
+    //add event 
     const gridItem = document.querySelectorAll('.grid-item');
     const gridLen = document.querySelectorAll('.grid-item').length;
     const player = document.getElementById('player');
     const parent = document.getElementsByClassName('grid-parent');
-    // console.log(gridItem)
     var i;
-
     for (i = 0; i < gridLen; i++) {
 
         gridItem[i].addEventListener('click', function (e) {
@@ -28,7 +37,6 @@ window.addEventListener("load", function (event) {
             var row = parseInt(itemNo.charAt(1));
             var col = parseInt(itemNo.charAt(2));
             var isPut = putOnArray(row, col);
-
 
         });
 
@@ -39,28 +47,32 @@ window.addEventListener("load", function (event) {
         if (isEmpty(r, c)) {
             if (turn % 2 == 0) {
 
-                ele.classList.add('bgA');
+                ele.firstChild.src = "./assets/images/cross2.svg"
                 arr[r][c] = 2;
                 player.innerText = "A"
                 playerTurn = "B";
-
+                var audio = new Audio("./assets/audio/putAudio.wav");
+                audio.play();
             } else {
 
-                ele.classList.add('bgB');
+                ele.firstChild.src = "./assets/images/circle.svg"
                 arr[r][c] = 1;
                 player.innerText = "B"
                 playerTurn = "A";
+                audio = new Audio("./assets/audio/putAudio.wav");
+                audio.play();
             }
             checkPattern();
             turn++;
-
-            console.log(arr);
-            // return true;
+            //check for draw
+            if (turn == 10 && !gameOver) {
+                setTimeout(function () { alert("Draw"); }, 1);
+                gameOver = true;
+                window.location.reload();
+            }
+            
+           
         }
-
-
-
-
     }
 
     function isEmpty(r, c) {
@@ -78,34 +90,38 @@ window.addEventListener("load", function (event) {
             content = 2;
         }
         var n, m, count;
+
         //check diagonal
         diagoLtoR = 0;
         diagoRtoL = 0;
+
         //left to right diagonal
         for (n = 0; n < 3; n++) {
             if (arr[n][n] == content) {
                 diagoLtoR++;
             }
         }
+
         //right to left diagonal
         if (arr[0][2] == content && arr[1][1] == content && arr[2][0] == content) {
             diagoRtoL = 3;
         }
-        if(diagoLtoR == 3 || diagoRtoL == 3){
+        if (diagoLtoR == 3 || diagoRtoL == 3) {
             response();
         }
-        //check row and column wise
+
+        //check row and column
         for (n = 0; n < 3; n++) {
             countRow = 0;
             countCol = 0;
             for (m = 0; m < 3; m++) {
                 if (arr[n][m] == content) {
                     countRow++;
-                   
+
                 }
                 if (arr[m][n] == content) {
                     countCol++;
-                    
+
                 }
 
             }
@@ -113,21 +129,32 @@ window.addEventListener("load", function (event) {
                 response();
             }
         }
+        // console.log(gameOver);
+
     }
 
     function response() {
-
+        
+        audioWin.play();
         if (playerTurn == "A") {
-            // alert("Player A Won!");
+
             setTimeout(function () { alert("Player A Won!"); }, 1);
+     
         }
         else {
-            // alert("Player B Won!");
+
             setTimeout(function () { alert("Player B Won!"); }, 1);
+      
+
+
         }
+       
+        gameOver = true;
+        window.location.reload();
     }
 
-    alert("Ready");
+
+    setTimeout(function () { alert("Start!"); }, 1);
 });
 
 
