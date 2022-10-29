@@ -1,11 +1,6 @@
 window.addEventListener("load", function (event) {
-   
-    
-    
-    function test(){
-        
-    }
-   
+
+
     //default array
     var arr = [
         [0, 0, 0],
@@ -21,14 +16,19 @@ window.addEventListener("load", function (event) {
     var gameOver = false;
 
     // audio 
-    var audioWin = new Audio("./assets/audio/success.mp3");
+    var audioWin = new Audio("./assets/audio/winner.wav");
+    var audioStart = new Audio("./assets/audio/start.wav");
+    var audioPut = new Audio("./assets/audio/putAudio.wav");
 
+    // model box
+    const startBtn = document.getElementById('btnStart');
     //add event 
     const gridItem = document.querySelectorAll('.grid-item');
     const gridLen = document.querySelectorAll('.grid-item').length;
-    const player = document.getElementById('player');
-    const parent = document.getElementsByClassName('grid-parent');
+    const feedback = document.getElementById('feedback');
     var i;
+
+
     for (i = 0; i < gridLen; i++) {
 
         gridItem[i].addEventListener('click', function (e) {
@@ -36,8 +36,7 @@ window.addEventListener("load", function (event) {
             itemNo = this.id;
             var row = parseInt(itemNo.charAt(1));
             var col = parseInt(itemNo.charAt(2));
-            var isPut = putOnArray(row, col);
-
+            putOnArray(row, col);
         });
 
     }
@@ -49,18 +48,18 @@ window.addEventListener("load", function (event) {
 
                 ele.firstChild.src = "./assets/images/cross2.svg"
                 arr[r][c] = 2;
-                player.innerText = "A"
+                feedback.innerText = "Turn for A"
                 playerTurn = "B";
-                var audio = new Audio("./assets/audio/putAudio.wav");
-                audio.play();
+               
+                audioPut.play();
             } else {
 
                 ele.firstChild.src = "./assets/images/circle.svg"
                 arr[r][c] = 1;
-                player.innerText = "B"
+                feedback.innerText = "Turn for B"
                 playerTurn = "A";
-                audio = new Audio("./assets/audio/putAudio.wav");
-                audio.play();
+           
+                audioPut.play();
             }
             checkPattern();
             turn++;
@@ -70,8 +69,8 @@ window.addEventListener("load", function (event) {
                 gameOver = true;
                 window.location.reload();
             }
-            
-           
+
+
         }
     }
 
@@ -134,27 +133,44 @@ window.addEventListener("load", function (event) {
     }
 
     function response() {
-        
-        audioWin.play();
+feedback.classList.add('newColor');
+    
         if (playerTurn == "A") {
-
+            feedback.innerHTML = "Player A Won";
+            audioWin.play();
             setTimeout(function () { alert("Player A Won!"); }, 1);
-     
+
         }
         else {
-
+            feedback.innerHTML = "Player B Won";
+            audioWin.play();
             setTimeout(function () { alert("Player B Won!"); }, 1);
-      
+
 
 
         }
-       
+audioWin.play();
         gameOver = true;
+
         window.location.reload();
+
     }
 
+    //model
+    // Get the modal
+    var modal = document.getElementById("model-wrap");
+    startBtn.onclick = function () {
+        modal.style.display = "none";
+        audioStart.play();
+    }
 
-    setTimeout(function () { alert("Start!"); }, 1);
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            audioStart.play();
+        }
+    }
 });
 
 

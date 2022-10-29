@@ -8,28 +8,44 @@
     <!-- css  -->
     <link rel="stylesheet" href="style/style.css">
 </head>
+<style>
+    .author{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 <body>
+    <div class="model-wrap" id="model-wrap">
+     
+        <div class="model" id="model">
+            <h5 class="title">Tic Tac Toe</h5>
+            <button class="btn start" id="btnStart">Start</button>
+        </div>
+    </div>
     <div class="container">
+    
         <h3 class="title">Tic Tac Toe</h3>
         <div class="grid-parent">
-            <div class="grid-item A" onclick="test();" id="I00"><img src="" alt="" srcset=""></div>
-            <div class="grid-item B" id="I01"><img src="" alt="" srcset=""></div>
-            <div class="grid-item C" id="I02"><img src="" alt="" srcset=""></div>
+            <div class="grid-item A border-left-none border-top-none"  id="I00"><img src="" alt="" srcset=""></div>
+            <div class="grid-item B border-top-none" id="I01"><img src="" alt="" srcset=""></div>
+            <div class="grid-item C border-right-none border-top-none" id="I02"><img src="" alt="" srcset=""></div>
 
-            <div class="grid-item D" id="I10"><img src="" alt=""></div>
+            <div class="grid-item D border-left-none" id="I10"><img src="" alt=""></div>
             <div class="grid-item E" id="I11"><img src="" alt="" srcset=""></div>
-            <div class="grid-item F" id="I12"><img src="" alt="" srcset=""></div>
+            <div class="grid-item F border-right-none" id="I12"><img src="" alt="" srcset=""></div>
             
-            <div class="grid-item G" id="I20"><img src="" alt="" srcset=""></div>
-            <div class="grid-item H" id="I21"><img src="" alt="" srcset=""></div>
-            <div class="grid-item I" id="I22"><img src="" alt="" srcset=""></div>
+            <div class="grid-item G border-bottom-none border-left-none" id="I20"><img src="" alt="" srcset=""></div>
+            <div class="grid-item H border-bottom-none" id="I21"><img src="" alt="" srcset=""></div>
+            <div class="grid-item I border-bottom-none border-right-none" id="I22"><img src="" alt="" srcset=""></div>
       
         </div>
-        <h3>Turn for player <span id="player">A</span></h3>
+        <h4 id="feedback">Turn for player <span id="player">A</span></h4>
     </div>
-    <!-- <div class="author">
+
+    <div class="author">
         <p>Coded by <a href="https://www.linkedin.com/in/sandesh-adhikari-7877161a7/">Sandesh Adhikari</a></p>
-    </div> -->
+    </div>
 </body>
 
 <script src="js/app.js"></script>
