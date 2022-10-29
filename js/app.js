@@ -24,29 +24,15 @@ window.addEventListener("load", function (event) {
 
         gridItem[i].addEventListener('click', function (e) {
             ele = document.getElementById(e.target.id);
-            // if(turn%2 == 0){
-            //     ele.classList.add('bgA');
-            // }
-            // else{
-            //     ele.classList.add('bgB');
-            // }
-
-            // console.log(id);
             itemNo = this.id;
-            // console.log(typeof itemNo);
             var row = parseInt(itemNo.charAt(1));
             var col = parseInt(itemNo.charAt(2));
-
-            // console.log(typeof/ row);
-            // console.log("row = " + itemNo.charAt(0));
-            // console.log("col = " + itemNo.charAt(1));
             var isPut = putOnArray(row, col);
 
 
         });
 
     }
-    alert("Event added");
 
 
     function putOnArray(r, c) {
@@ -92,18 +78,38 @@ window.addEventListener("load", function (event) {
             content = 2;
         }
         var n, m, count;
-
-        //check row wise
+        //check diagonal
+        diagoLtoR = 0;
+        diagoRtoL = 0;
+        //left to right diagonal
         for (n = 0; n < 3; n++) {
-            count = 0;
+            if (arr[n][n] == content) {
+                diagoLtoR++;
+            }
+        }
+        //right to left diagonal
+        if (arr[0][2] == content && arr[1][1] == content && arr[2][0] == content) {
+            diagoRtoL = 3;
+        }
+        if(diagoLtoR == 3 || diagoRtoL == 3){
+            response();
+        }
+        //check row and column wise
+        for (n = 0; n < 3; n++) {
+            countRow = 0;
+            countCol = 0;
             for (m = 0; m < 3; m++) {
                 if (arr[n][m] == content) {
-                    count++;
-                    console.log("::Count = " + count + " for " + playerTurn);
+                    countRow++;
+                   
+                }
+                if (arr[m][n] == content) {
+                    countCol++;
+                    
                 }
 
             }
-            if (count == 3) {
+            if (countRow == 3 || countCol == 3) {
                 response();
             }
         }
