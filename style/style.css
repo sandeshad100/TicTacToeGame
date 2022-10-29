@@ -8,7 +8,7 @@
     gap: 15px;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/images/wood-compressed.jpg');
+    /* background-image: url('../assets/images/wood-compressed.jpg'); */
     /* background-color: whitesmoke; */
     width: 100%;
     height: 100vh;
@@ -29,8 +29,25 @@ color: brown;
 }
 
 .grid-item{
+    
     border: 1px solid brown;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.bg{
+
+}
+
+.whenPut{
+    opacity: 0.4;
+}
+
+.bgA{
+    background-color: green;
+}
+
+.bgB{
+    background-color: red;
+   
 }
